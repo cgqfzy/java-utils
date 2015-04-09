@@ -36,6 +36,12 @@ public class StdOut {
 		out.flush();
 	}
 
+	public static void print(double x) {
+		out.print(x);
+		out.flush();
+	}
+
+	
 	public static void print(byte x) {
 		out.print(x);
 		out.flush();
