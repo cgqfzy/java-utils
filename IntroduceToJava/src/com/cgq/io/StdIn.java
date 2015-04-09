@@ -1,5 +1,7 @@
 package com.cgq.io;
 
+import java.io.BufferedInputStream;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -109,5 +111,90 @@ public final class StdIn {
 		 return false;
 	 }
 	 
+	 public static String[] readAllStrings(){
+		 String[] tokens = WHITESPACE_PATTERN.split(readAll());
+		 if (tokens.length == 0 || tokens[0].length() > 0){
+			 return tokens;
+		 }
+		 String[] decaptokens = new String[tokens.length - 1];
+		 for (int i = 0; i < tokens.length - 1; i++) {
+			decaptokens[i] = tokens[i+1];
+		}
+		 return decaptokens;
+	 }
 	 
+	 public static String[] readAllLines(){
+		 ArrayList lines = new ArrayList();
+		 while (hasNextLine()) {
+			lines.add(readLine());
+		}
+		 return (String[]) lines.toArray(new String[0]);
+	 }
+	 
+	 
+	 public static int[] readAllInts(){
+		 String[] fields = readAllStrings();
+		 int[] vals = new int[fields.length];
+		 for (int i = 0; i < fields.length; i++) {
+			vals[i] = Integer.parseInt(fields[i]);
+		 }
+		 return vals;
+	 }
+	
+	 public static double[] readAllDoubles(){
+		 String[] fields = readAllStrings();
+		 double[] vals = new double[fields.length];
+		 for (int i = 0; i < fields.length; i++) {
+			vals[i] = Double.parseDouble(fields[i]);
+		 }
+		 return vals;
+	 }
+	 
+	 static{
+		 resync();
+	 }
+	 
+	 private static void resync(){
+		 setScanner(new Scanner(new BufferedInputStream(System.in),CHARSET_NAME));
+	 }
+
+	private static void setScanner(Scanner scanner) {
+		// TODO Auto-generated method stub
+		StdIn.scanner = scanner;
+		StdIn.scanner.useLocale(LOCAL);
+	}
+	
+	public static int[] readInts(){
+		return readAllInts();
+	}
+	
+	public static double[] readDoubles(){
+		return readAllDoubles();
+	}
+	
+	public static String[] readStrings(){
+		return readAllStrings();
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("Type a string: ");
+		String s = StdIn.readString();
+		System.out.println("Your string is: " + s);
+		System.out.println();
+		
+		System.out.println("Type an int: ");
+        int a = StdIn.readInt();
+        System.out.println("Your int was: " + a);
+        System.out.println();
+
+        System.out.println("Type a boolean: ");
+        boolean b = StdIn.readBoolean();
+        System.out.println("Your boolean was: " + b);
+        System.out.println();
+
+        System.out.println("Type a double: ");
+        double c = StdIn.readDouble();
+        System.out.println("Your double was: " + c);
+        System.out.println();
+	}
 }
