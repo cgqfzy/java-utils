@@ -30,7 +30,7 @@ public class In {
 	// make whitespace characters significant
 	private static final Pattern EMPTY_PATTERN = Pattern.compile("");
 	// used to read the entire input source
-	private static final Pattern EVERYTHING_PATTERN = Pattern.compile("\\A+");
+	private static final Pattern EVERYTHING_PATTERN = Pattern.compile("\\A");
 
 	public In() {
 		scanner = new Scanner(new BufferedInputStream(System.in), CHART_SET);
